@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @keyframes moveLeftIn {
+            0% {
+                transform: translateX(101vw);
+                opacity: 0;
+            }
+            50%{
+                transform: scale(2);
+                background-color: rgba(255,0,0,0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-109px);
+                opacity: 0;
+                
+            }
+        }
+        #contain{
+            height: 100px;
+            width: 100px;
+            background: red;
+            animation: moveLeftIn ease-in-out 5s 1;
+
+
+        }
+    </style>
+</head>
+<body>
+<div id="contain"></div>
+<script>
+    function test1(str) {
+        let obj ={
+            '(': ')',
+            '{': '}',
+            '[': ']',
+        }
+        let arr = str.split('')
+        arr.shift()
+        arr.pop()
+        console.log(arr)
+        if (arr.length%2!==0){
+            return false
+        }
+        for (let i=0; i<arr.length/2;i++){
+            console.log()
+            if (obj[arr[i]]!==arr[arr.length-1-i]){
+                return false
+            }
+        }
+        return true
+    }
+
+    console.log(test1('"((()))"'))
+</script>
+</body>
+</html>

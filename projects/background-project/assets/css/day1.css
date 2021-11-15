@@ -1,0 +1,79 @@
+body{
+    margin: 0;
+    background: #292c30
+
+}
+#wrapper{
+    position: relative;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+    overflow: hidden;
+    background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.8)), url("../../../images/bg2.jpg");
+    background-repeat: no-repeat,no-repeat;
+    background-size: auto auto,100% 100%;
+    background-attachment: fixed,fixed;
+}
+#introduce{
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    transition: opacity 1s ease;
+    z-index: 1;
+    padding: 8rem 4rem 6rem 4rem;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+}
+#introduce h1{
+    font-size: 5em;
+    line-height: 1;
+}
+#introduce p{
+    margin-top: 0;
+    font-size: 1.5em;
+    line-height: 1;
+    word-wrap: break-word;
+
+}
+#introduce p a{
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    transition: color 0.2s ease-in-out,bottom 0.2s ease-in-out;
+}
+#introduce p a:hover{
+    color: aqua;
+    text-decoration: none;
+    border-bottom: none;
+}
+#introduce .go{
+    cursor: pointer;
+    color: aqua;
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    transition: border-bottom-color 0.2s ease-in-out,border-top-color 0.2s ease-in-out,border-left-color 0.2s ease-in-out,border-right-color 0.2s ease-in-out
+}
+#introduce .go:hover{
+    border: 2px solid aqua;
+    border-radius: 50%;
+
+}
+#introduce .go:hover a{
+    color: aqua;
+}
+#introduce .go:hover a:before{
+    color: aqua;
+}
+#introduce .go a{
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 25px;
+    border: none;
+    line-height: 50px;
+}

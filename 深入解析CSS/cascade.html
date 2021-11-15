@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>层叠+优先级+声明顺序</title>
+    <style>
+      @keyframes moveLeftIn {
+        0%{
+          background: #38a725;
+          transform: translate3d(0,0,0) rotateX(0deg);
+        }
+        50%{
+          transform: translate3d(100px,0,100px) rotateX(90deg);
+          background: #237bdc;
+        }
+        100%{
+          background: #38a725;
+          transform: translate3d(0,0,0) rotateY(0deg);
+        }
+      }
+        html{
+          font-size: 18px;
+        }
+        :root{
+          --hello:100px;
+          font-size: 19px;
+        }
+        .ddd{
+            font-size: 16px;
+            margin-left: 1em;
+        }
+        .clearfix::after{
+          display: block;
+          content: '';
+          clear: both;
+        }
+        .container{
+          border: 1px solid darkred;
+        }
+        .container .item{
+          float: left;
+          height: 200px;
+          width: 200px;
+
+        }
+      .sanjiaoxing{
+        height: 0;
+        width: 0;
+        border-bottom:10px solid red;
+        border-left:10px solid transparent;
+        border-right:10px solid transparent;
+      }
+      .container .item:nth-child(1){
+        background: palevioletred;
+      }
+      .container .item:nth-child(2){
+        background: darkcyan;
+      }
+      .container .item:nth-child(3){
+        background: #cccccc;
+      }
+        .animation{
+          animation: moveLeftIn 1.5s ease-in-out 3;
+        }
+
+    </style>
+</head>
+<body onclick="alert('body')">
+<div style="width: 100px;height: 1000px;background:saddlebrown" id="elementId" data-key="key">das</div>
+<div class="ddd" onclick="alert('ddd')"><button onclick="alert('btn')">dsada</button></div>
+<div style="width: 40px;height: 80px">
+  dsaaaaaaaaaaaaaaaaaaaaaaa<span style="float: left">dsada</span>aaaaaaaaaaaaaaaaaaaaasfpjsafjisaojagijgjiadjoagjidagiadgjiagiajigadogia
+</div>
+<div class="container">
+  <div class="item" name="elementName">item</div>
+  <div class="item" style="flex: 1">item</div>
+  <div class="item">item</div>
+</div>
+<ul>
+  <li>a</li>
+  <li>b</li>
+  <li>c</li>
+</ul>
+
+<div style="width: 100px;height: 100px;background:#38a725" class="animation"></div>
+<div class="clearfix"></div>
+<div style="position:absolute;width: 100px;height: 100px;background:saddlebrown"></div>
+<div class="sanjiaoxing"></div>
+<script>
+
+  let ul = document.getElementsByTagName('ul')[0]
+  ul.addEventListener('click',(e)=>{
+    console.log(e.target)
+    console.log(e.currentTarget)
+    if (e.target&&e.target.nodeName === 'LI'){
+      alert(e.target.innerHTML)
+    }
+  }, false)
+  document.getElementsByTagName('div')[1].style.setProperty('background-color','#as3!important')
+  let byId = document.getElementById('elementId')
+  let byClassName = document.getElementsByClassName('item') // HTMLCollection
+  let byTagName = document.getElementsByTagName('div') // HTMLCollection
+  let byName = document.getElementsByName('elementName') // nodeList
+  let bySelector1 = document.querySelector('#elementId') // 第一个节点
+  let bySelector2 = document.querySelectorAll('#elementId') // nodeList
+  console.log(byId.parentNode.firstElementChild) // das
+  console.log(byId.parentNode.firstElementChild.outerHTML) // <div style="width: 10px;height: 10px;background:saddlebrown" id="elementId" data-key="key">das</div>
+  byId.parentNode.firstElementChild.setAttribute('id','newId')
+  let textNode = document.createTextNode('text node')
+  let textNode1 = document.createTextNode('sad')
+  let element = document.createElement('p')
+  let comment = document.createComment('text node')
+  console.log(textNode1)
+  element.appendChild(textNode)
+  byId.insertBefore(element,byId.childNodes[0])
+  byId.removeChild(byId.childNodes[0])
+  byId.replaceChild(textNode1,byId.childNodes[0])
+  console.log(byId.cloneNode())
+  console.log(textNode)
+  console.log(element)
+  console.log(comment)
+  console.log(window)
+  try{
+    throw new Error()
+  }catch (e) {
+    var j = 1;
+    console.log(j)
+    console.log(e)
+  }
+  console.log(j)
+
+  // region eventLoop
+  // console.warn('start');
+  // new Promise(resolve => {
+  //   console.log('sasa')
+  //   resolve()
+  // }).then(()=>{
+  //   console.log('222222')
+  // })
+  // console.log('??')
+  // setTimeout(() => {
+  //   console.warn('children2');
+  //   Promise.resolve().then(() => {
+  //     console.warn('children3');
+  //   })
+  // })
+  //
+  //
+  // new Promise((resolve, reject) => {
+  //   console.warn('children4');
+  //   setTimeout(() => {
+  //     console.warn('children5');
+  //     resolve('children6')
+  //   }, 0)
+  // }).then((res) => {
+  //   console.warn('children7');
+  //   setTimeout(() => {
+  //     console.warn(res);
+  //   }, 0)
+  // })
+  // console.log('end')
+  // endregion
+
+  function Range(from, to) {
+    this.from = from
+    this.to = to
+  }
+  function Parent( age){
+    this.parentName = ['parentName']
+    this.parentAge = age
+  }
+  function Child(name, age){
+    Parent.call(this,name+'s parent',age+12)
+    this.childName = name
+    this.childAge = age
+  }
+  Child.prototype = new Parent( 28)
+  let c1 = new Child('child1',16)
+  let c2 = new Child('child2', 16)
+  console.log(c1)
+  console.log(c1.__proto__ === c2.__proto__) // true
+  //c1.parentName.push('parent of both child1 and child2')
+  console.log(c1.parentName === c2.parentName) // true
+
+  console.log(Object.getPrototypeOf(c1)) // true
+  console.log(Object.getPrototypeOf(Object.getPrototypeOf(c1))) // true
+  console.log(Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(c1))) ) // true
+  let scope = 'global'
+  function checkScope(){
+    let scope = 'local'
+    function f() {
+      return scope
+    }
+    //return f
+    return f()
+  }
+
+  console.log(checkScope())
+  //console.log(checkScope())
+  let helloword = 'hellow rod'
+
+</script>
+</body>
+</html>

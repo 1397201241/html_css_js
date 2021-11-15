@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>table实现</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.wrapper{
+	width:800px;
+	height:200px;
+	display:table;
+}
+.wrapper>div{
+	display:table-cell;
+}
+.left{
+	
+	width:300px;
+	background:red;
+	
+}
+.center{
+	background:yellow;
+	flex:1;
+}
+.right{
+	width:300px;
+	background:blue;
+	
+}
+</style>
+</head>
+<body>
+<div class=wrapper>
+	<div class="left">
+		<p>左边画一条彩虹</p>
+	</div>
+	<div class="center">
+	
+		<p>中间画条🐍</p>
+	</div>
+	<div class="right">
+		<p>右边画条龙</p>
+	</div>
+	
+</div>
+</body>
+
+</html>

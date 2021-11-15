@@ -1,0 +1,8 @@
+.arrow-down:before{
+    color: #fff;
+    content: "\2193";
+    transition: color 0.2s ease-in-out
+}
+.hidden{
+    visibility: hidden;
+}

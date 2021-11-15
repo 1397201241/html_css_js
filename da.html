@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    .container{
+      display: flex;
+        justify-content: space-around;
+      height: 100px;
+    }
+    .left{
+      height: 100%;
+      width: 100px;
+      background: #33e8ac;
+    }
+    .right{
+        height: 100%;
+        width: 100px;
+        background: #237bdc;
+    }
+    .center{
+
+        height: 100%;
+        /*均匀分配空间*/
+        flex: 1;
+        background: #292c30;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="left"></div>
+
+  <div class="center"></div>
+    <div class="right"></div>
+</div>
+<script>
+
+    function Person(name,age){
+        this.name = name
+        this.age1 = age
+    }
+
+    function Dog(name,age){
+        Person.call(this,'name',age)
+        this.name = name
+        this.age = age
+    }
+    //Person.prototype=new Dog('zhangsan',11)
+    console.log(new Dog('zhangsan',11))
+    function bubbleSort(arr){
+        let length = arr.length
+        for (let i =0;i<length-1;i++){
+            for (let j =0;j<length-1-i;j++){
+                if (arr[j+1]<arr[j]){
+                    [arr[j],arr[j+1]] = [arr[j+1],arr[j]]
+                }
+            }
+        }
+        return arr
+    }
+    function selectSort(arr){
+        let length = arr.length
+        for (let i =0;i<length-1;i++){
+            let indexMin = i
+            for (let j =i+1;j<length;j++){
+                if (arr[j]<arr[indexMin]){
+                    indexMin=j
+                }
+            }
+            let tmp = arr[i]
+            arr[i] = arr[indexMin]
+            arr[indexMin] = tmp
+        }
+        return arr
+    }
+
+    function insertSort(arr) {
+        let length = arr.length
+        for (let i = 1; i < length; i++) {
+            let j = i
+            let tmp = arr[i]
+            // 待插入元素跟前面的元素相比，如果小于前面的元素，
+            while (j > 0 && arr[j - 1] > tmp) {
+                arr[j] = arr[j - 1]
+                j--
+            }
+            arr[j] = tmp
+        }
+        return arr
+    }
+    function mergeSort(arr) {
+        let length = arr.length
+        if (length===1){
+            return arr
+        }
+        let mid = Math.floor(length/2)
+        let left = arr.slice(0,mid)
+        let right = arr.slice(mid,length)
+        return merge(mergeSort(left),mergeSort(right))
+        function merge(l,r){
+            let result = []
+            let il=0
+            let ir=0
+            while (il<l.length&&ir<r.length){
+                if (l[il]<r[ir]){
+                    result.push(l[il++])
+                }else   result.push(r[ir++])
+            }
+            while (il<l.length){
+                result.push(l[il++])
+            }
+            while (ir<r.length){
+                result.push(r[ir++])
+            }
+            return result
+        }
+    }
+    function quickSort(arr,low,high) {
+        if (low>=high){
+            return
+        }
+
+        let i = low
+        let j = high
+        let s = arr[i]
+        while (i<j){
+            while (i<j&&arr[j]>=s){
+                j--
+            }
+            arr[i] = arr[j]
+            while (i<j&&arr[i]<=s){
+                i++
+            }
+            arr[j] = arr[i]
+        }
+        arr[i]=s
+        quickSort(arr,low,i-1)
+        quickSort(arr,i+1,high)
+        return arr
+    }
+    console.log(quickSort([5,4,3,2,1],0,4))
+
+
+    function getM(n, m) {
+        let stringN = m.toString()
+        let result = 0
+        for (let i = 0; i < n+1; i++) {
+            let arrayN = i.toString().split('')
+            for (let j of arrayN) {
+                if (j === stringN) {
+                    result++
+                }
+            }
+        }
+        return result
+    }
+    function hee(str){
+        let tmp = str.split('')
+        let letters = []
+        for (let s of tmp){
+            if (/[a-zA-Z]/.test(s)){
+                letters.push(s)
+            }
+        }
+        let doubles = []
+        for (let i=0;i<letters.length-1;i++){
+            let double = []
+            for (let j=i+1;j<letters.length;j++){
+                if (letters[i].charCodeAt()-letters[j].charCodeAt()===32){
+                    double.push(letters[j],letters[i])
+                    letters.splice(i--,1)
+                    letters.splice(j--,1)
+                    break
+                }else if (letters[i].charCodeAt()-letters[j].charCodeAt()===-32){
+                    double.push(letters[i],letters[j])
+                    letters.splice(i--,1)
+                    letters.splice(j--,1)
+                    break
+                }
+            }
+
+            if (double.length>0){
+                doubles.push(double)
+            }
+        }
+        for (let x=0;x< doubles.length;x++){
+            let tmp=doubles[x];
+            let result = []
+            for (let y =x+1;y<doubles.length;y++){
+                if (tmp[0].charCodeAt()-doubles[y][0].charCodeAt()===-1){
+                    result.push(...tmp,...doubles[y])
+                    tmp = doubles[y]
+                }
+            }
+            console.log()(result)
+        }
+        return result
+
+    }
+    // A-25-Z     7    a-25-z
+    hee('SwSE$3454356DD$$#E#eswsxxsssAAWDxxdderfvcRFER65645hbg^^%%^UnbnvccTRChnyvcxcvVCFR')
+    console.log("Z".charCodeAt()-"a".charCodeAt())
+</script>
+
+</body>
+</html>

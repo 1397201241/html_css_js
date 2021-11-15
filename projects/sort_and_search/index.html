@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="dom"/>
+<span></span>
+<div style="height:0;width:0;border-bottom: 10px solid red;border-left: 10px solid transparent;border-right: 10px solid transparent"></div>
+<script src="https://www.baidu.com?callback=getBaidu"></script>
+<script>
+    function ArrayList(){
+        this.array = []
+        this.insert = function (item) {
+            this.array.push(item)
+        }
+        this.toString = function () {
+            return this.array.join()
+        }
+    }
+    // 生成未排序数组
+    function createNonSortedArray (size) {
+        let arr = new ArrayList()
+        for (let i = size; i > 0; i--) {
+            arr.insert(i)
+        }
+        return arr.array
+    }
+
+    //region 冒泡排序
+    /**
+     * 冒泡排序
+     * 复杂度 O(n^2)
+     * @param arr
+     * @returns {*}
+     */
+    function bubbleSort(arr) {
+        let length = arr.length
+        for (let i = 0; i < length-1; i++) {
+            console.log('===============')
+            for (let j = 0; j < length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+                }
+                console.log(arr)
+            }
+        }
+        return arr
+    }
+    //endregion
+
+    // region 选择排序
+    /**
+     * 选择排序 原址比较排序法
+     * 找出最小的数，放置在第一位，以此类推
+     * 复杂度 O(n^2)
+     * @param arr
+     * @returns {*}
+     */
+    function selectSort(arr) {
+        let length = arr.length
+        for (let i = 0; i < length-1; i++) {
+            console.log('=============')
+            let indexMin = i
+            for (let j = i+1; j < length; j++){
+                if (arr[j] < arr[indexMin]) {
+                    indexMin = j
+                    // [arr[j], arr[i]] = [arr[i], arr[j]]
+                }
+            }
+            let tmp = arr[i]
+            arr[i] = arr[indexMin]
+            arr[indexMin] = tmp
+            console.log(arr)
+        }
+        return arr
+    }
+    //endregion
+
+    // region 插入排序
+    /**
+     * 插入排序 O(n^2) 排序小型数组时，优于冒泡排序和选择排序
+     * 这是相对数组项而言的，每一次循环中，给待排序的元素寻找一个位置，准确地插入到数组项中
+     * j 待插入元素的位置
+     * tmp 待插入的元素
+     * @param arr
+     */
+    function insertSort(arr) {
+        let length = arr.length
+        let tmp, j
+        for (let i = 1; i < length; i++) {
+            j = i
+            tmp = arr[i]
+            while (j > 0 && tmp < arr[j - 1]) {
+                arr[j] = arr[j - 1]
+                j--
+            }
+            arr[j] = tmp
+            console.log(arr)
+        }
+    }
+    //endregion
+
+    // region 归并排序
+    /**
+     * 归并排序 分而治之 O(nlogn)
+     * 将数组不断分为长度为1的数组项，然后对其排序并合并为新的数组
+     * @param arr
+     * @returns {*[]|*}
+     */
+    // function mergeSort(arr) {
+    //     let length = arr.length
+    //     if (length===1){
+    //         return arr
+    //     }
+    //     let mid = Math.floor(length/2)
+    //     let left = arr.slice(0,mid)
+    //     let right = arr.slice(mid,length)
+    //     return merge(mergeSort(left), mergeSort(right))
+    //     function merge(l,r) {
+    //         let ir;
+    //         let il = ir = 0
+    //         let result = []
+    //         while (l.length>il && r.length>ir) {
+    //             if (l[il] > r[ir]){
+    //                 result.push(r[ir++])
+    //             } else result.push(l[il++])
+    //         }
+    //         while (l.length > il){
+    //             result.push(l[il++])
+    //         }
+    //         while (r.length > ir){
+    //             result.push(r[ir++])
+    //         }
+    //         return result
+    //     }
+    // }
+    //endregion
+
+    // region 快速排序
+    /**
+     * 快速排序 O(nlogn)
+     * @param D 待排序数组
+     * @param low 起点
+     * @param high 终点
+     */
+    function partition(D, low, high) {
+        if (low >= high) return
+        let i = low;
+        let j = high;
+        let s = D[low];
+        while (i < j) {
+            while (i < j && D[j] >= s) {
+                j--;
+                console.log(`j=${j}`)
+            }
+            D[i] = D[j];
+            console.log(D)
+            while (s >= D[i] && i < j) {
+                i++;
+                console.log(`i=${i}`)
+            }
+            D[j] = D[i];
+            console.log(D)
+        }
+        console.log(D)
+        console.log(i)
+        D[i] = s;
+        console.log(D)
+        partition(D, low, i - 1);
+        partition(D, i + 1, high)
+        return D
+    }
+
+    function quicksort(D) {
+        return partition(D, 0, D.length - 1);
+    }
+
+    console.log(quicksort([3,6,4,3,1,5,8,1,6,7,1,4,6,8,7]))
+    //endregion
+
+    // let arr = createNonSortedArray(7)
+    // quicksort(arr)
+    //console.log(mergeSort([5,2,3,1]))
+    //========================
+    // let str = 'a:32,b:2@a:2,b:1'
+    // let arr = str.split('@')
+    // console.log(arr)
+    // let strLeft = arr[0]
+    // let strRight = arr[1]
+    // let arrLeft = strLeft.split(',')
+    // let arrRight = strRight.split(',')
+    // let left = {}
+    // let right = {}
+    // for (let o of arrLeft){
+    //     let tmp = o.split(':')
+    //     left[tmp[0]] = Number(tmp[1])
+    // }
+    // for (let o of arrRight){
+    //     let tmp = o.split(':')
+    //     right[tmp[0]] = Number(tmp[1])
+    // }
+    // for (let j in right){
+    //     if (j in left){
+    //         left[j]-=right[j]
+    //         left[j] = left[j].toString()
+    //     }
+    // }
+    //console.log(JSON.stringify(left).replace(/"*/,''))
+
+    //region 类型判断
+    /*let str ="1212"
+    let array = [1,2]
+    let num = 1
+    let obj= {
+        a:1
+    }
+    let fn = function (){
+        console.log("asdas")
+    }
+    console.log(typeof str)
+    console.log(typeof array) // object
+    console.log(typeof obj) // object
+    console.log(typeof null) //object
+    console.log(typeof fn) // object
+    console.log(str instanceof String) //false
+    console.log(num instanceof Number) //false
+    console.log(null instanceof Object) //false
+    console.log(obj instanceof Object) //true
+    console.log(array instanceof Array) //true
+    console.log(fn instanceof Function) //true
+    console.log(str.constructor===String) //true
+    console.log(array.constructor===Array) //true
+    //console.log(null.constructor===null) //报错
+    //console.log(undefined.constructor===undefined) //报错
+    console.log(Object.prototype.toString.call(str)) // [object String]
+    console.log(Object.prototype.toString.call(array)) // [object Array]
+    console.log(Object.prototype.toString.call(obj)) // [object Object]
+    console.log(Object.prototype.toString.call(null)) // [object Null]
+    console.log(Object.prototype.toString.call(undefined)) // [object Undefined]*/
+    //endregion
+
+    // region 嵌套函数 闭包
+    // 勾股定理求斜边
+    // function hypotenuse(a, b) {
+    //     function square(x){
+    //         return x*x
+    //     }
+    //     return Math.sqrt(square(a)+square(b))
+    // }
+    // function add(x){
+    //     let a = 0
+    //     function bdd(y){
+    //         a=a+x+y
+    //         return a
+    //     }
+    //     return bdd
+    // }
+    //
+    // console.log(add(2)(2))
+    // endregion
+
+    // region 函数调用方式
+    // 1.作为函数调用
+    // let hptn = hypotenuse(3, 4)
+    // // 2.作为对象方法调用
+    // let calculator = {
+    //     a: 1,
+    //     b: 2,
+    //     add: function (){
+    //         console.log(this) // 作为方法调用，this指向调用它的对象
+    //         fn()
+    //         function fn(){
+    //             console.log(this) // 作为函数调用，指向全局或者undefined
+    //         }
+    //         return this.a+this.b
+    //     }
+    // }
+    // let result = calculator.add()
+    // // 3.作为构造函数调用
+    // function Dog(name,age){
+    //     this.name=name
+    //     this.age=age
+    // }
+    // // es6类写法
+    // class Person{
+    //     constructor(name,age) {
+    //         this.name=name
+    //         this.age=age
+    //     }
+    // }
+    // let p = new Person("guo",18)
+    // let d = new Dog("guo",18)
+    // // 4.通过call(),apply()来间接调用函数
+    // console.log(Object.prototype.toString.call([]))
+    // endregion
+
+    // region 闭包
+    // let scope = 'global'
+    // function checkScope(){
+    //     let scope = 'local'
+    //     function f() {
+    //         return scope
+    //     }
+    //     return f
+    //     // return f()
+    // }
+    // function counter(){
+    //     let n=0
+    //     return {
+    //         count:function (){
+    //             return n++
+    //         },
+    //         reset:function (){
+    //             n=0
+    //         }
+    //     }
+    // }
+    // let a = counter()
+    // let b = counter()
+    // console.log(a.count())
+    // console.log(b.count())
+    // endregion
+
+    // region 对象访问
+    // console.log(Object.prototype.toString.call(counter))
+    // console.log(Object.prototype.toString.call(counter()))
+    // console.log(counter.toString())
+    //
+    // console.log(Object.keys({a:1}))
+    // console.log(Object.values({a:1}))
+    // console.log(Object.getOwnPropertyNames({a:1})) // ['a']
+    // endregion
+
+    // region 箭头函数
+    // let f = {
+    //     name: 'asdas',
+    //     fn1: function () {
+    //         console.log(this.name)
+    //     },
+    //     fn2: () => {
+    //         console.log(this)
+    //     }
+    // }
+    // f.fn1() // f
+    // f.fn2() // window
+    // function f2(){
+    //     console.log(this)
+    //     return ()=>{
+    //         console.log(this)
+    //     }
+    // }
+    // let f3 = f2.call({a:1})
+    // f3()
+    // endregion
+
+    // region 引用，垃圾回收
+    // let o1 = {
+    //     a:1
+    // }
+    // let o2 = o1
+    // o1 = null
+    // o1 = {
+    //     a:2
+    // }
+    // console.log(o2)
+    // console.log(o1)
+    // endregion
+
+    // region 数组去重
+    // let arr = [3,2,1,1]
+    // console.log(Array.from(new Set(arr)))
+    // let result= []
+    // for (let i of arr){
+    //     // if (result.indexOf(i)===-1){
+    //     //     result.push(i)
+    //     // }
+    //     if (result.includes(i)){
+    //         break
+    //     }else result.push(i)
+    // }
+    // console.log(result)
+    // endregion
+    // region 数据绑定
+
+
+    // endregion
+    // region
+    // const getAttribute = (object /* 目标对象 */,attribute /*目标属性*/, defaultValue /*默认值*/) => {
+    //     // @return any
+    //     let attributes=attribute.split('.')
+    //     let tmp = object
+    //     for (let a of attributes){
+    //         if ( tmp instanceof Object){
+    //             console.log(a)
+    //             if (a in tmp){
+    //                 tmp = tmp[a]
+    //             }else return defaultValue
+    //         }else if(tmp instanceof Array){
+    //             if (tmp.includes(a)){
+    //                 tmp = tmp[a]
+    //             }else return defaultValue
+    //         }
+    //     }
+    //     return tmp
+    // }
+    // const obj1 = {a: {b: {c: 100}}, d: [{f: 'abc'}]};
+    // console.log(getAttribute(obj1, 'd.0.f', 0))
+    // endregion
+    // region 数据双向绑定
+    // let span = document.getElementsByTagName('span')[0]
+    // let dom = document.getElementById('dom')
+    // let obj={}
+    // Object.defineProperty(obj,'val',{
+    //     get:function () {
+    //         return this.val
+    //     },
+    //     set(v) {
+    //         this.val=v
+    //         dom.innerHTML=v
+    //         span.innerHTML=v
+    //     }
+    // })
+    // dom.addEventListener('keyup',e=>{
+    //     obj.val = e.target.value
+    // })
+    // endregion
+    // region
+    function removeDuplicates(prices){
+        let length = prices.length
+        let result = 0
+        for (let i = 0;i<length;i++){
+            for (let j=i+1;j<length;j++){
+                if (prices[i]<=prices[j]){
+                    result = Math.max(result,prices[j]-prices[i])
+                }
+            }
+        }
+        return result
+    }
+    // endregion
+    // region
+    // endregion
+    // region
+    // endregion
+
+
+</script>
+</body>
+</html>

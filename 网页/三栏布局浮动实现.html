@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>浮动实现</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.wrapper{
+	width:800px;
+	height:200px;
+	
+}
+.left{
+	float:left;
+	width:300px;
+	background:red;
+	
+}
+.center{
+	background:yellow;
+}
+.right{
+	float:right;
+	width:300px;
+	background:blue;
+	
+}
+</style>
+</head>
+<body>
+<div class=wrapper>
+	<div class="left">
+		<p>左边画一条彩虹</p>
+	</div>
+	
+	<div class="right">
+		<p>右边画条龙</p>
+	</div>
+	<div class="center">
+	<!--//中间盒子放最后，不然占位了右边盒子就到下面去了-->
+		<p>中间画条🐍</p>
+	</div>
+</div>
+</body>
+
+</html>

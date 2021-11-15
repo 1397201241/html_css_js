@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="s"/>
+<script>
+
+    function LinkedList(){
+        function Node(element){
+            this.element = element
+            this.next = null
+        }
+        this.length=0
+        this.head = null
+        this.append = function (element){
+            let current
+            let node = new Node(element)
+            if (this.head === null){
+                this.head = node
+            }else {
+                current = this.head
+                while (current.next){
+                    current = current.next
+                }
+                current.next = node
+            }
+            this.length++
+        }
+        this.removeAt = function (position) {
+            let current = this.head
+            let previous
+            if (position > -1 && position < this.length) {
+                if (position === 0) {
+                    this.head = current.next
+                } else {
+                    let index = 0
+                    while (index++ < position) {
+                        previous = current
+                        current = current.next
+                    }
+                    previous.next = current.next
+                }
+                this.length--
+                return current.element
+            } else return null
+        }
+    }
+    let node = new LinkedList()
+    node.append(0)
+    node.append(1)
+    node.append(2)
+    node.append(3)
+    console.log(node)
+    node.removeAt(3)
+    console.log(node)
+</script>
+</body>
+<style>
+</style>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #clock-wrapper{
+
+        }
+        #clock-wrapper .clock{
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            box-sizing: border-box;
+            padding: 5px;
+            border: 4px solid #a59f9f;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        .clock-face{
+            position: absolute;
+            width: 182px;
+            height: 182px;
+        }
+
+        #clock-wrapper .clock .hand{
+            width: 50%;
+            height: 4px;
+            background: #33e8ac;
+            position: absolute;
+            top: 50%;
+            transform: rotate(90deg);
+            transition: all 0.2s;
+            transform-origin: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="clock-wrapper">
+  <div class="clock">
+    <div class="clock-face">
+        <div class="hand"></div>
+        <div class="hand"></div>
+        <div class="hand"></div>
+    </div>
+  </div>
+</div>
+<script>
+    const secondsHand=document.getElementsByClassName('hand')[2]
+    const minsHand=document.getElementsByClassName('hand')[1]
+    const hoursHand=document.getElementsByClassName('hand')[0]
+    function setDate(){
+        const now=new Date()
+        let seconds=now.getSeconds()*6+90
+        const minutes=now.getMinutes()*6+90
+        const hours=now.getHours()*30+90
+        //dozen`t work
+        if (seconds===450){
+            seconds=90
+            secondsHand.style.transition='none'
+        }
+        secondsHand.style.transform=`rotate(${seconds}deg)`
+        minsHand.style.transform=`rotate(${minutes}deg)`
+        hoursHand.style.transform=`rotate(${hours}deg)`
+    }
+    setInterval(setDate,1000)
+</script>
+</body>
+</html>

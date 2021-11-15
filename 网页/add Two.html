@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>test</title>
+</head>
+<body>
+<script>
+var addTwoNumbers = function(l1, l2) {
+    let node = new ListNode('head')
+	console.log(node);
+    let temp = node , sum , n = 0
+	console.log(temp);
+    while( l1 || l2 ){
+        const n1 = l1 ? l1.val : 0
+        const n2 = l2 ? l2.val : 0
+        sum = n1 + n2 + n
+        temp.next = new ListNode( sum % 10 )
+        temp = temp.next
+		
+        n = parseInt( sum / 10 )
+        if(l1) l1 = l1.next
+        if(l2) l2 = l2.next
+    }
+    if( n > 0 ) temp.next = new ListNode(n)
+    return node.next;
+};
+function ListNode(val){
+	this.val=val;
+	this.next=null;
+}
+var l1=new ListNode(3);
+var l2=new ListNode(5);
+console.log(l1);
+console.log(l2);
+var result=addTwoNumbers(l1,l2);
+
+</script>)
+</script>
+</body>
+</html>

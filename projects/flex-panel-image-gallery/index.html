@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+      body{
+          margin: 0;
+          padding: 0;
+          text-align: center;
+          cursor: pointer;
+          color: #ccc;
+          font-size: 24px;
+      }
+    .panels{
+        display: flex;
+        min-height: 100vh;
+        overflow: hidden;
+        justify-content: space-around;
+
+    }
+    .panel{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        flex: 1;
+        transition: flex 0.3s ease-in-out,
+                    font-size 0.3s ease-in-out,
+                    background 0.3s;
+    }
+    .panel.open{
+        flex: 1.5;
+        font-size: 50px;
+    }
+    .panel>*{
+        transition: transform 0.3s;
+    }
+    .panel>*:first-child{
+        transform: translateY(-200px);
+    }
+    .active>*:first-child{
+        transform: translateY(0px);
+    }
+    .panel p:last-child{
+        transform: translateY(200px);
+    }
+    .active p:last-child{
+        transform: translateY(0px);
+    }
+    .panel1{
+        background-image:  url("../images/bg1.jpg") ;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .panel2{
+        background-image:  url("../images/bg2.jpg");
+        background-attachment: fixed;
+        background-size: cover;
+    }
+      .panel3{
+          background-image:  url("../images/bg3.jpg") ;
+          background-position:right;
+          background-repeat: no-repeat;
+          background-size: cover;
+      }
+      .panel4{
+          background-image:  url("../images/bg4.jpg") ;
+
+          background-repeat: no-repeat;
+          background-position: left;
+          background-size: cover;
+      }
+      .panel5{
+          background-image:  url("../images/bg5.jpg") ;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+      }
+      .panel6{
+          background-image:  url("../images/bg6.jpg") ;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+      }
+
+  </style>
+</head>
+<body>
+<div class="panels">
+    <div class="panel panel1">
+        <p>Hello</p>
+        <p>Indian</p>
+        <p>Mi_Fans</p>
+    </div>
+
+    <div class="panel panel2">
+        <p>How</p>
+        <p>Are</p>
+        <p>You</p>
+    </div>
+    <div class="panel panel4">
+        <p>Are</p>
+        <p>You</p>
+        <p>Ok</p>
+    </div>
+    <div class="panel panel3">
+        <p>Are</p>
+        <p>You</p>
+        <p>Ok</p>
+    </div>
+    <div class="panel panel5">
+        <p>Are</p>
+        <p>You</p>
+        <p>Ok</p>
+    </div>
+    <div class="panel panel6">
+        <p>Are</p>
+        <p>You</p>
+        <p>Ok</p>
+    </div>
+</div>
+<script>
+    const panels=document.querySelectorAll('.panel')
+    function toggleOpen(){
+        this.classList.toggle('open')
+    }
+    function toggleActive(e){
+        if (e.propertyName.includes('flex')){
+            this.classList.toggle('active')
+        }
+
+    }
+    panels.forEach(panel=>panel.addEventListener('click',toggleOpen))
+    panels.forEach(panel=>panel.addEventListener('transitionend',toggleActive))
+    console.log('caf\u00e9')
+</script>
+</body>
+
+</html>

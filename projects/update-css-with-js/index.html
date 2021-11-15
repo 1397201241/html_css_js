@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        :root{
+            --base:#237bdc;
+            --spacing:10px;
+            --blur:10px
+        }
+        body{
+            background: #193549;
+            text-align: center;
+            font-size: 36px;
+            color: white;
+        }
+
+        .h1{
+            color: var(--base);
+        }
+        .controls{
+            margin-bottom: 40px;
+        }
+        img{
+            width: 640px;
+            height: 400px;
+            background: var(--base);
+            padding: var(--spacing);
+            filter: blur(var(--blur));
+        }
+    </style>
+</head>
+
+<body>
+<h2>Update CSS with <span class="h1">Javascript</span></h2>
+<div class="controls">
+    <label for="spacing">Spacing:</label>
+    <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px"/>
+    <label for="blur">Blur:</label>
+    <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px"/>
+    <label for="base">Base Color:</label>
+    <input type="color" name="base" value="#237bdc"/>
+</div>
+<img src="../images/bg2.jpg">
+<div style="display: flex;justify-content: flex-end">
+    <div style="background: #33e8ac;height: 100px;width: 100px">1</div>
+    <div style="background: #237bdc;height: 100px;width: 100px">1</div>
+    <div style="background: #193549;height: 100px;width: 100px">1</div>
+</div>
+<script>
+    const inputs=document.querySelectorAll('.controls input')
+    function handleChange(){
+        let {value}=this //输入框的值
+        //获取data-
+        const suffix=this.dataset.sizing||''
+        //根元素style
+        document.documentElement.style.setProperty(`--${this.name}`,value+suffix)
+    }
+    inputs.forEach(input=>input.addEventListener('change',handleChange))
+</script>
+</body>
+
+</html>
