@@ -127,6 +127,10 @@
 
 15. 阴影
 
+    ```css
+    box-shadow: #bbd0d5 100px 100px 200px 200px inset;
+    ```
+
 16. 过渡
 
 17. 变换
@@ -155,23 +159,52 @@
     }
     ```
 
-19. 发
+19. 单行字体溢出省略
+
+    ```css
+    .text-overflow {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    ```
+
+20. 多行文字溢出省略
+
+    ```css
+    .textArea-overflow {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-flex;
+      -webkit-line-clamp:2;
+      -webkit-box-orient: vertical;
+      white-space: nowrap;
+    }
+    ```
+
+21. 元素事件失效属性
+
+    ```css
+    .disable-event {
+      pointer-events: none;// 使元素上的事件失效，可配合地图，加阴影透明效果
+    }
+    ```
+
+22. 背景图通过padding实现宽高自适应
+
+    ```css
+    .good-background {
+      width: 100%;
+      position: relative;
+      padding-bottom: 5.89151%;// 图片的高比宽
+      background: url("background.png") no-repeat center top;
+      background-size: 100% auto;
+    }
+    ```
+
+23. 
 
 
 
 
-
-1. 这方面我没有经验，能不能**指点一下**？  新人培养方案  
-
-2. 
-
-    async和defer 
-
-    元素垂直居中 
-   
-    vue-router的两种模式以及区别 
-
-    vue响应式原理 
-
-    [算法题]()：有效括号
 
