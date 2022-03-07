@@ -178,10 +178,9 @@
       display: -webkit-flex;
       -webkit-line-clamp:2;
       -webkit-box-orient: vertical;
-      white-space: nowrap;
     }
     ```
-
+    
 21. 元素事件失效属性
 
     ```css
@@ -202,7 +201,9 @@
     }
     ```
 
-23. 
+23. 默认情况下，元素的宽为100%，但是对于高度来说，如果元素的父元素高度没有设定时，该元素的高度也没0
+
+24. 
 
 
 
