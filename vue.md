@@ -25,28 +25,42 @@
    `v-model`后面还可以接参数，number将输入自动转化为数字，lazy，deboundce防抖
 
    ```javascript
-   let span = document.getElementsByTagName('span')[0]
-   let input = document.getElementById('input')
-   let obj={}
-   Object.defineProperty(obj,'val',{
-       get:function () {
-           return this.val
-       },
-       set(v) {
-           input.value=v
-           span.innerHTML=v
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <title>Vue2双向绑定</title>
+   </head>
+   <body>
+   <input id="input"></input>
+   <span id="span"></span>
+   </body>
+   <script>
+     let obj = {}
+     let input = document.getElementById('input')
+     let span = document.getElementById('span')
+     // 数据劫持
+     Object.defineProperty(obj, 'text', {
+       configurable: true,
+       enumerable: true,
+       set(newVal) {
+         input.value = newVal
+         span.innerText = newVal
        }
-   })
-   dom.addEventListener('keyup',e=>{
-       obj.val = e.target.value
-   })
+     })
+     // 输入监听
+     input.addEventListener('keyup', function (e) {
+       obj.text = e.target.value
+     })
+   </script>
+   </html>
    ```
 
    vue2利用`Object.defineProperty()`的存取器，在修改数据的同时更新视图
 
    vue3利用ES6的`Proxy`对象实现，相对于前面的方法它还可以修改数组
 
-5. v-for列表渲染
+5. v-for列表渲染，要绑定key值
 
    该指令可以基于数据源重复地渲染元素
 
@@ -107,59 +121,7 @@
 
     可以**修改**浏览器历史记录栈，但是需要后台配置
 
-12. 
-
-13. 
-
-14. 浮动
-
-    浮动的元素会脱离标准流，导致高度塌陷问题，可能会影响后边布局
-
-    清除浮动的方法是包含浮动contain float
-
-    给**包含浮动的元素**添加clear类、空标签
-
-    ```css
-    .clearfix::after{
-      display: block;
-      content: '';
-      clear: both;
-    }
-    ```
-
-15. flexbox弹性容器布局
-
-    flex=1包含三个属性，如下
-
-    ```css
-    flex: 1;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 0;
-    ```
-
-    分别代表放大  缩小 和 元素基准值   
-
-    可以均匀分配弹性容器剩余宽度
-
-16. 用css画个三角形 
-
-    ```css
-    .triangle{
-        height:0;
-        width:0;
-        border-bottom: 10px solid red;s
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-top: 10px solid transparent
-    }
-    ```
-
-17. 三栏布局
-
-    float  绝对定位 flex布局  grid布局  table布局
-
-    flex=1自动分配           grid-template-columns:100px auto 100px
+    
 
 18. css动画
 
@@ -169,49 +131,13 @@
 
 19. transform变换后不脱离标准流，原来的位置还占据着；
 
-20. position定位
-
-    static默认定位，按照文档流定位，left, top等属性无效
-
-    absolute绝对定位，相对于最近的祖先定位元素（默认是html根元素），元素脱离文档流
-
-    fixed固定定位，相对于浏览器视口定位，元素脱离文档流，原来的位置会被占据
-
-    relative相对定位，相对于原来的位置定位，不会脱离文档流，原来的位置不会被占据
-
 21. 记录一件蠢事，在表单中，下面的代码会产生意向不到的笑话
 
     ```javascript
     this.form.creator = this.form.user // 双向绑定了，为什么能写出这个代码啊 ?guorh?
     ```
 
-22. 渐变
-
-23. 阴影
-
-24. 过渡
-
-25. 变换
-
-    
-
 26. 发
 
 
-
-
-
-
-
-
-
- async和defer 
-
- 元素垂直居中 
-
- 
-
- vue响应式原理 
-
- [算法题]()：有效括号
 
